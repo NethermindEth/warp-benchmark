@@ -100,4 +100,5 @@ if __name__ == "__main__":
                 md_file.write(
                     f'![steps graph](./images/{contract}_{function.replace(" ","_")}.png)\n'
                 )
+                print(f'Wrote file ./images/{contract}_{function.replace(" ","_")}.png')
                 plt.clf()

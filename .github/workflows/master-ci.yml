@@ -1,0 +1,26 @@
+name: master-ci
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Create graphs for dashboard
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.9"
+      - run: |
+          pip install matplotlib
+          python dashboard.py
+
+      - name: Update graphs
+        uses: test-room-7/action-update-file@v1
+        with:
+          file-path: images/*.png
+          commit-msg: Update graphs
+          github-token: ${{ secrets.GITHUB_TOKEN }}
